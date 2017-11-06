@@ -45,6 +45,7 @@ class SVGADrawable(val videoItem: SVGAVideoEntity, val dynamicItem: SVGADynamicE
         }
 
     var scaleType: ImageView.ScaleType = ImageView.ScaleType.MATRIX
+    val paintFlagsDrawFilter = PaintFlagsDrawFilter(0, Paint.FILTER_BITMAP_FLAG)
 
     internal val drawer = SVGACanvasDrawer(videoItem, dynamicItem)
 
@@ -52,6 +53,7 @@ class SVGADrawable(val videoItem: SVGAVideoEntity, val dynamicItem: SVGADynamicE
         if (cleared) {
             return
         }
+        canvas?.drawFilter = paintFlagsDrawFilter
         canvas?.let {
             drawer.canvas = it
             drawer.drawFrame(currentFrame, scaleType)
